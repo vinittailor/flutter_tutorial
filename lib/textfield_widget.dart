@@ -1,11 +1,9 @@
 import 'dart:developer';
 import 'package:flutter/material.dart';
 
-
 void main() {
   runApp(const MyApp());
 }
-
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -27,17 +25,36 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: const DemoBasicTextField(),
-      // home: const ControllingInput(),
-      // home: const DynamicChanges(),
-      // home: const PasswordInput(),
+      home: const BaseWidget(),
     );
   }
 }
 
 
+class BaseWidget extends StatefulWidget {
+  const BaseWidget({super.key});
 
+  @override
+  State<BaseWidget> createState() => _BaseWidgetState();
+}
 
+class _BaseWidgetState extends State<BaseWidget> {
+  @override
+  Widget build(BuildContext context) {
+    return const Scaffold(
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            DemoBasicTextField(),
+            ControllingInput(),
+            DynamicChanges(),
+            PasswordInput(),
+          ],
+        ),
+      ),
+    );
+  }
+}
 
 
 //region Basic TextField
@@ -46,7 +63,6 @@ class MyApp extends StatelessWidget {
 ///It includes a variety of properties for customizing its appearance and behavior.
 ///By specifying the decoration property, you can add a label, hint text, border,
 ///and other visual elements to the text field.
-
 class DemoBasicTextField extends StatefulWidget {
   const DemoBasicTextField({super.key});
 
@@ -57,15 +73,13 @@ class DemoBasicTextField extends StatefulWidget {
 class _DemoBasicTextFieldState extends State<DemoBasicTextField> {
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Padding(
-        padding: EdgeInsets.all(20),
-        child: Center(
-          ///---Basic TextField Code
-          child: TextField(
-            decoration: InputDecoration(
-              labelText: 'Enter your text',
-            ),
+    return const  Padding(
+      padding: EdgeInsets.all(20),
+      child: Center(
+        ///---Basic TextField Code
+        child: TextField(
+          decoration: InputDecoration(
+            labelText: 'Enter your text',
           ),
         ),
       ),
@@ -87,29 +101,29 @@ class ControllingInput extends StatefulWidget {
 }
 
 class _ControllingInputState extends State<ControllingInput> {
-
   final TextEditingController _controller = TextEditingController();
-
 
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.all(20),
-        child: Center(
-          ///---Controlling Input TextField Code
-          child: Column(
-            children: [
-              TextField(
-                controller: _controller,
-                decoration: const InputDecoration(
-                  labelText: 'Enter your text',
-                ),
+    return Padding(
+      padding: const EdgeInsets.all(20),
+      child: Center(
+        ///---Controlling Input TextField Code
+        child: Column(
+          children: [
+            TextField(
+              controller: _controller,
+              decoration: const InputDecoration(
+                labelText: 'Enter your text',
               ),
-              ///---In this way you can print and use controller
-              Text(_controller.text,style: const TextStyle(fontSize: 20),)
-            ],
-          ),
+            ),
+
+            ///---In this way you can print and use controller
+            Text(
+              _controller.text,
+              style: const TextStyle(fontSize: 20),
+            )
+          ],
         ),
       ),
     );
@@ -130,35 +144,35 @@ class DynamicChanges extends StatefulWidget {
 }
 
 class _DynamicChangesState extends State<DynamicChanges> {
-
   final TextEditingController _controller = TextEditingController();
   String controllerValue = "";
 
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.all(20),
-        child: Center(
-          ///---Dynamic Changes TextField Code
-          child: Column(
-            children: [
-              TextField(
-                controller: _controller,
-                onChanged: (value){
-                  // Implement your dynamic logic here.
-                  print("TextField value is => ${_controller.text}");
-                  setState(() {
-                    controllerValue = value;
-                  });
-                },
-                decoration: const InputDecoration(
-                  labelText: 'Enter your text',
-                ),
+    return Padding(
+      padding: const EdgeInsets.all(20),
+      child: Center(
+        ///---Dynamic Changes TextField Code
+        child: Column(
+          children: [
+            TextField(
+              controller: _controller,
+              onChanged: (value) {
+                // Implement your dynamic logic here.
+                print("TextField value is => ${_controller.text}");
+                setState(() {
+                  controllerValue = value;
+                });
+              },
+              decoration: const InputDecoration(
+                labelText: 'Enter your text',
               ),
-              Text(controllerValue,style: const TextStyle(fontSize: 20),)
-            ],
-          ),
+            ),
+            Text(
+              controllerValue,
+              style: const TextStyle(fontSize: 20),
+            )
+          ],
         ),
       ),
     );
@@ -179,20 +193,16 @@ class PasswordInput extends StatefulWidget {
 }
 
 class _PasswordInputState extends State<PasswordInput> {
-
-
   @override
   Widget build(BuildContext context) {
-    return  const Scaffold(
-      body: Padding(
-        padding: EdgeInsets.all(20),
-        child: Center(
-          ///---Password Input TextField Code
-          child: TextField(
-            obscureText: true,
-            decoration: InputDecoration(
-              labelText: 'Enter your text',
-            ),
+    return const Padding(
+      padding: EdgeInsets.all(20),
+      child: Center(
+        ///---Password Input TextField Code
+        child: TextField(
+          obscureText: true,
+          decoration: InputDecoration(
+            labelText: 'Enter your text',
           ),
         ),
       ),
@@ -200,6 +210,3 @@ class _PasswordInputState extends State<PasswordInput> {
   }
 }
 //endregion
-
-
-
