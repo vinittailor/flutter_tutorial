@@ -34,7 +34,7 @@ class _TextWidgetState extends State<TextWidget> {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      body: Center( ),
+      body: Center(),
     );
   }
 }
